@@ -1,8 +1,3 @@
-/*
- * 게시판 기능을 담당하는 클래스
- * 추후 파일 및 페이징 기능 추가 예정
- * 현재는 간단한 CRUD 메서드만 구현
- */
 
 package com.board.example.service;
 
@@ -35,7 +30,7 @@ public class BoardService {
 		Page<Board> list = boardRepository.findAll(PageRequest.of(page,size));
 		
 		resultMap.put("list", list.stream().map(BoardResponseDto::new).collect(Collectors.toList()));
-		resultMap.put("pageing", list.getPageable());
+		resultMap.put("paging", list.getPageable());
 		resultMap.put("totalCnt", list.getTotalElements());
 		resultMap.put("totalPage", list.getTotalPages());
 		
