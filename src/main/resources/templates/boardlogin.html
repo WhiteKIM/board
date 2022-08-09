@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 화면</title>
+    <link href="/css/login.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="layout">
+        <form action="/login" method="post">
+            <input id="id" type="text" name="id">
+            <input id="password" type="password" name="password">
+            <button id="submit" type="submit">로그인</button>
+            <button id="register" type="button" onclick="location.href='/register'">회원가입</button>
+        </form>
+    </div>
+</body>
+</html>
