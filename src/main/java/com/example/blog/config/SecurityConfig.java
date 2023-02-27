@@ -55,4 +55,70 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/auth/loginProc")
                 .defaultSuccessUrl("/");
     }
+    /*
+    // @ 스프링 시큐리티 v6.0부터
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+
+        String password = bCryptPasswordEncoder.encode("1234");
+
+        manager.createUser(User.withUsername("test2")
+                .password(password)
+                .roles(RoleType.SALER.name())
+                .build()
+        );
+        manager.createUser(User.withUsername("test3")
+                .password(password)
+                .roles(RoleType.BUYER.name())
+                .build()
+        );
+        manager.createUser(User.withUsername("test4")
+                .password(password)
+                .roles(RoleType.ADMIN.name())
+                .build()
+        );
+        return manager;
+    }
+
+    // 로그인 구현부
+    // 로그인 정보 보안 구현
+    // 기존 configure단 대체
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, PrincipalDetailService principalDetailService)
+            throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .userDetailsService(principalDetailService)
+                .passwordEncoder(bCryptPasswordEncoder)
+                .and()
+                .build();
+    }
+
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/","/webapp/*","/Board","/board/*","/js/*","/api/*");
+    }
+
+    @Bean
+    @Order(SecurityProperties.BASIC_AUTH_ORDER)
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        http
+                .authorizeHttpRequests(auth -> auth
+                                .requestMatchers("/board/write/*").authenticated()
+                                .anyRequest().permitAll()
+                        );
+        http
+                // login 설정
+                .formLogin();
+
+        return http.build();
+    }
+
+     */
 }
